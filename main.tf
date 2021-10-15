@@ -128,7 +128,7 @@ resource "aws_instance" "web" {
   subnet_id = aws_subnet.default.id
 
   # Use cloud-init instead of provisioner
-  user_data              = file("userdata.sh")
+  user_data              = file("${path.module}/userdata.sh")
   
   # We run a remote provisioner on the instance after creating it.
   # In this case, we just install nginx and start it. By default,
