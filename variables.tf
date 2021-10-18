@@ -18,13 +18,12 @@ variable "aws_region" {
 }
 
 # Ubuntu Precise 12.04 LTS (x64)
-variable "aws_amis" {
-  default = {
-    eu-west-2 = "ami-02c7ed3df628d7ba2"
-  }
+variable "aws_ami" {
+  description = "The AWS AMI to use for the web server"
+  default = "ami-02c7ed3df628d7ba2"
 }
 
 variable "service_name" {
-  description = "Name of the service, to be embedded in resource names"
+  description = "Name of the service to be created by the module"
   default     = "demo-two-tier"
 }
