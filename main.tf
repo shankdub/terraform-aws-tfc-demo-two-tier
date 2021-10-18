@@ -126,18 +126,5 @@ resource "aws_instance" "web" {
   # environment it's more common to have a separate private subnet for
   # backend instances.
   subnet_id = aws_subnet.default.id
-
-  # Use cloud-init instead of provisioner
-  user_data              = file("${path.module}/userdata.sh")
   
-  # We run a remote provisioner on the instance after creating it.
-  # In this case, we just install nginx and start it. By default,
-  # this should be on port 80
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo apt-get -y update",
-#       "sudo apt-get -y install nginx",
-#       "sudo service nginx start",
-#     ]
-#   }
 }
