@@ -14,12 +14,17 @@
 
 variable "aws_region" {
   description = "AWS region to launch servers."
-  default     = "us-west-1"
+  default     = "eu-west-2"
 }
 
 # Ubuntu Precise 12.04 LTS (x64)
 variable "aws_amis" {
   default = {
-    us-west-1 = "ami-09bedd705318020ae"
+    eu-west-2 = "ami-02c7ed3df628d7ba2"
   }
+}
+
+variable "service_name" {
+  description = "Name of the service, to be embedded in resource names"
+  default     = "demo-two-tier"
 }

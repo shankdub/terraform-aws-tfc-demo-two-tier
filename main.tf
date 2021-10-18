@@ -26,8 +26,8 @@ resource "aws_subnet" "default" {
 
 # A security group for the ELB so it is accessible via the web
 resource "aws_security_group" "elb" {
-  name        = "terraform_example_elb"
-  description = "Used in the terraform"
+  name        = "${var.service_name}_elb"
+  description = "ELB security group"
   vpc_id      = aws_vpc.default.id
 
   # HTTP access from anywhere
@@ -50,8 +50,8 @@ resource "aws_security_group" "elb" {
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "default" {
-  name        = "terraform_example"
-  description = "Used in the terraform"
+  name        = "${var.service_name}_default"
+  description = "Default security group"
   vpc_id      = aws_vpc.default.id
 
   # SSH access from anywhere
@@ -80,7 +80,7 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_elb" "web" {
-  name = "terraform-example-elb"
+  name = "${var.service_name}-elb"
 
   subnets         = [aws_subnet.default.id]
   security_groups = [aws_security_group.elb.id]
@@ -112,12 +112,16 @@ resource "aws_instance" "web" {
 
   instance_type = "t2.micro"
 
+  tags = {
+    Name = "${var.service_name}-web"
+  }
+
   # Lookup the correct AMI based on the region
   # we specified
   ami = var.aws_amis[var.aws_region]
 
   # The name of our SSH keypair we created above.
-#   key_name = aws_key_pair.auth.id
+  #   key_name = aws_key_pair.auth.id
 
   # Our Security group to allow HTTP and SSH access
   vpc_security_group_ids = [aws_security_group.default.id]
@@ -126,5 +130,5 @@ resource "aws_instance" "web" {
   # environment it's more common to have a separate private subnet for
   # backend instances.
   subnet_id = aws_subnet.default.id
-  
+
 }
