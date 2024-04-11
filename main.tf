@@ -1,10 +1,5 @@
 provider "aws" {
   region = "us-west-2"
-
-  # Make sure to configure your credentials either via environment
-  # variables or a shared credentials file.
-  TFC_AWS_PROVIDER_AUTH = var.TFC_AWS_PROVIDER_AUTH
-  TFC_AWS_RUN_ROLE_ARN = var.TFC_AWS_RUN_ROLE_ARN
 }
 
 # Create a VPC to launch our instances into
