@@ -11,6 +11,16 @@
 # variable "key_name" {
 #   description = "Desired name of AWS key pair"
 # }
+variable "secret_key" {
+  type        = string
+  description = "The secret key for AWS access"
+  sensitive   = true
+}
+variable "access_key" {
+  type        = string
+  description = "The access key for AWS access"
+  sensitive   = false
+}
 
 variable "aws_region" {
   description = "AWS region to launch servers."
