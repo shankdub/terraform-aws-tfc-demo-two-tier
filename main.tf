@@ -1,17 +1,9 @@
-terraform {
-    requieres {
-        providers {
-            aws = {
-                source  = "hashicorp/aws"
-                version = "= 3.72.0"
-            }
-        }
-    }
-
-}
 provider "aws" {
-  region = "us-west-2"
+  region     = "us-west-2"
+  access_key = var.access_key 
+  secret_key = var.secret_key
 }
+
 
 # Create a VPC to launch our instances into
 resource "aws_vpc" "default" {
